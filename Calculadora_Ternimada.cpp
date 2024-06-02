@@ -1,6 +1,6 @@
-#incluir <ventanas.h>
-#incluir <cadena>
-#incluir <iostream>
+#include <windows.h>
+#include <string>
+#include <iostream>
 
 #define ID_BUTTON_SUM 1
 #define ID_BUTTON_RES 2
@@ -8,6 +8,8 @@
 #define ID_BUTTON_DIV 4
 #define ID_BUTTON_NOC 5
 
+HWND hAdd, hSub, hMul, hDiv, hClr;
+HWND hEdit1, hEdit2, hEditRes;
 
 double GetNumberFromEdit(HWND hEdit){
     char buffer[256];
@@ -65,8 +67,30 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
                 }
                 break;
             }
+            
+            			
+			 char buffer[256];
+            snprintf(buffer, sizeof(buffer), "%f", result);
+            SetWindowText(hEditRes, buffer);
+            std::cout << "Resultado: " << result << std::endl;
 
         }
+        
+        	 if (LOWORD(wParam) == ID_BUTTON_NOC)
+        {
+            SetWindowText(hEdit1, "");
+            SetWindowText(hEdit2, "");
+            SetWindowText(hEditRes, "");
+        }
+        break;
+
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+
+    default:
+        return DefWindowProc(hwnd, msg, wParam, lParam);
+	}
 	
 }
 
