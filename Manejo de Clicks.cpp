@@ -55,6 +55,8 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
 			 	MessageBox(hwnd, "UPS: Trataste de dividir por cero ", "Error", MB_OK | MB_ICONERROR);
 			 	result = 0.0;
 			 }
+		    //falto el break :>
+		    break;
 			}
 		}
 	}
