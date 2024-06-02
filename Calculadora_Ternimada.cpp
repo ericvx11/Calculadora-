@@ -30,6 +30,43 @@ LRESULT CALLBACK WindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPar
         hDiv = CreateWindow("Button", " / ", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 290, 60, 60, 20, hwnd, (HMENU)ID_BUTTON_DIV, NULL, NULL);
         hClr = CreateWindow("Button", "OtraVez", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 380, 60, 60, 20, hwnd, (HMENU)ID_BUTTON_NOC, NULL, NULL);
         break;
+        
+        
+         case WM_COMMAND:
+
+
+
+        if (LOWORD(wParam) == ID_BUTTON_SUM || LOWORD(wParam) == ID_BUTTON_RES || LOWORD(wParam) == ID_BUTTON_MUL || LOWORD(wParam) == ID_BUTTON_DIV)
+        {
+            double num1 = GetNumberFromEdit(hEdit1);
+            double num2 = GetNumberFromEdit(hEdit2);
+            double result = 0.0;
+
+            switch (LOWORD(wParam))
+            {
+            case ID_BUTTON_SUM:
+                result = num1 + num2;
+                break;
+            case ID_BUTTON_RES:
+                result = num1 - num2;
+                break;
+            case ID_BUTTON_MUL:
+                result = num1 * num2;
+                break;
+            case ID_BUTTON_DIV:
+                if (num2 != 0.0)
+                {
+                    result = num1 / num2;
+                }
+                else
+                {
+                    MessageBox(hwnd, "UPS: Trataste de dividir por cero ", "Error", MB_OK | MB_ICONERROR);
+                    result = 0.0;
+                }
+                break;
+            }
+
+        }
 	
 }
 
